@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION || 'us-west-1' }}
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build & Push API
+        run: |
+          API_REPO=${{ steps.login-ecr.outputs.registry }}/streamsphere-api
+          docker build -t streamsphere-api:latest app/api
+          docker tag streamsphere-api:latest $API_REPO:latest
+          docker push $API_REPO:latest
+
+      - name: Build & Push Worker
+        run: |
+          WORKER_REPO=${{ steps.login-ecr.outputs.registry }}/streamsphere-worker
+          docker build -t streamsphere-worker:latest app/worker
+          docker tag streamsphere-worker:latest $WORKER_REPO:latest
+          docker push $WORKER_REPO:latest
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init/Apply
+        working-directory: infra
+        run: |
+          terraform init -input=false
+          terraform apply -auto-approve -input=false

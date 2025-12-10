@@ -1,0 +1,17 @@
+# Terraform local directories
+.terraform/
+infra/.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+.crash
+*.log
+
+# Node modules (if any)
+node_modules/
+
+# IDE / OS junk
+.vscode/
+.idea/
+.DS_Store

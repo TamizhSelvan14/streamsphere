@@ -1,0 +1,2879 @@
+{
+  "version": 4,
+  "terraform_version": "1.9.5",
+  "serial": 73,
+  "lineage": "33f3dc0a-2a2c-01ef-8415-ab1c77ff15e1",
+  "outputs": {
+    "alb_dns": {
+      "value": "streamsphere-alb-1879663737.us-west-1.elb.amazonaws.com",
+      "type": "string"
+    },
+    "aurora_endpoint": {
+      "value": "streamsphere-aurora.cluster-cv6m2qaqwg5q.us-west-1.rds.amazonaws.com",
+      "type": "string"
+    },
+    "cognito_user_pool_client_id": {
+      "value": "273l9nu46t344ai6sj67gtt9e0",
+      "type": "string"
+    },
+    "cognito_user_pool_id": {
+      "value": "us-west-1_S6so5gOgJ",
+      "type": "string"
+    },
+    "frontend_bucket": {
+      "value": "streamsphere-frontend-us-west-1",
+      "type": "string"
+    },
+    "frontend_cloudfront_domain": {
+      "value": "d3r7tqmr0iw6fy.cloudfront.net",
+      "type": "string"
+    },
+    "sqs_queue_url": {
+      "value": "https://sqs.us-west-1.amazonaws.com/203918887492/streamsphere-jobs",
+      "type": "string"
+    },
+    "video_bucket": {
+      "value": "streamsphere-videos-us-west-1",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "aws_availability_zones",
+      "name": "available",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "all_availability_zones": null,
+            "exclude_names": null,
+            "exclude_zone_ids": null,
+            "filter": null,
+            "group_names": [
+              "us-west-1-zg-1"
+            ],
+            "id": "us-west-1",
+            "names": [
+              "us-west-1a",
+              "us-west-1c"
+            ],
+            "state": null,
+            "timeouts": null,
+            "zone_ids": [
+              "usw1-az1",
+              "usw1-az3"
+            ]
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_distribution",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "aliases": [],
+            "arn": "arn:aws:cloudfront::203918887492:distribution/E93M3OH7T37O4",
+            "caller_reference": "terraform-20251210010932188000000001",
+            "comment": null,
+            "continuous_deployment_policy_id": "",
+            "custom_error_response": [],
+            "default_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "cache_policy_id": "",
+                "cached_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "compress": false,
+                "default_ttl": 0,
+                "field_level_encryption_id": "",
+                "forwarded_values": [
+                  {
+                    "cookies": [
+                      {
+                        "forward": "none",
+                        "whitelisted_names": []
+                      }
+                    ],
+                    "headers": [],
+                    "query_string": false,
+                    "query_string_cache_keys": []
+                  }
+                ],
+                "function_association": [],
+                "grpc_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "lambda_function_association": [],
+                "max_ttl": 0,
+                "min_ttl": 0,
+                "origin_request_policy_id": "",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "",
+                "smooth_streaming": false,
+                "target_origin_id": "frontend-s3-origin",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "redirect-to-https"
+              }
+            ],
+            "default_root_object": "index.html",
+            "domain_name": "d3r7tqmr0iw6fy.cloudfront.net",
+            "enabled": true,
+            "etag": "EIGM5237LI1W8",
+            "hosted_zone_id": "Z2FDTNDATAQYW2",
+            "http_version": "http2",
+            "id": "E93M3OH7T37O4",
+            "in_progress_validation_batches": 0,
+            "is_ipv6_enabled": false,
+            "last_modified_time": "2025-12-10 01:09:32.725 +0000 UTC",
+            "logging_config": [],
+            "ordered_cache_behavior": [],
+            "origin": [
+              {
+                "connection_attempts": 3,
+                "connection_timeout": 10,
+                "custom_header": [],
+                "custom_origin_config": [],
+                "domain_name": "streamsphere-frontend-us-west-1.s3.us-west-1.amazonaws.com",
+                "origin_access_control_id": "",
+                "origin_id": "frontend-s3-origin",
+                "origin_path": "",
+                "origin_shield": [],
+                "s3_origin_config": [],
+                "vpc_origin_config": []
+              }
+            ],
+            "origin_group": [],
+            "price_class": "PriceClass_All",
+            "restrictions": [
+              {
+                "geo_restriction": [
+                  {
+                    "locations": [],
+                    "restriction_type": "none"
+                  }
+                ]
+              }
+            ],
+            "retain_on_delete": false,
+            "staging": false,
+            "status": "Deployed",
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "trusted_key_groups": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "trusted_signers": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "viewer_certificate": [
+              {
+                "acm_certificate_arn": "",
+                "cloudfront_default_certificate": true,
+                "iam_certificate_id": "",
+                "minimum_protocol_version": "TLSv1",
+                "ssl_support_method": ""
+              }
+            ],
+            "wait_for_deployment": true,
+            "web_acl_id": ""
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_s3_bucket.frontend"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_origin_access_control",
+      "name": "oac_frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:cloudfront::203918887492:origin-access-control/EXBEHH0PSHLGU",
+            "description": "Managed by Terraform",
+            "etag": "ETVPDKIKX0DER",
+            "id": "EXBEHH0PSHLGU",
+            "name": "streamsphere-frontend-oac",
+            "origin_access_control_origin_type": "s3",
+            "signing_behavior": "always",
+            "signing_protocol": "sigv4"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "api",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-west-1:203918887492:log-group:/ecs/streamsphere-api",
+            "id": "/ecs/streamsphere-api",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/ecs/streamsphere-api",
+            "name_prefix": "",
+            "retention_in_days": 7,
+            "skip_destroy": false,
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "worker",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-west-1:203918887492:log-group:/ecs/streamsphere-worker",
+            "id": "/ecs/streamsphere-worker",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/ecs/streamsphere-worker",
+            "name_prefix": "",
+            "retention_in_days": 7,
+            "skip_destroy": false,
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cognito_user_pool",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_recovery_setting": [
+              {
+                "recovery_mechanism": [
+                  {
+                    "name": "verified_email",
+                    "priority": 1
+                  },
+                  {
+                    "name": "verified_phone_number",
+                    "priority": 2
+                  }
+                ]
+              }
+            ],
+            "admin_create_user_config": [
+              {
+                "allow_admin_create_user_only": false,
+                "invite_message_template": []
+              }
+            ],
+            "alias_attributes": null,
+            "arn": "arn:aws:cognito-idp:us-west-1:203918887492:userpool/us-west-1_S6so5gOgJ",
+            "auto_verified_attributes": [
+              "email"
+            ],
+            "creation_date": "2025-12-10T00:57:02Z",
+            "custom_domain": "",
+            "deletion_protection": "INACTIVE",
+            "device_configuration": [],
+            "domain": "",
+            "email_configuration": [
+              {
+                "configuration_set": "",
+                "email_sending_account": "COGNITO_DEFAULT",
+                "from_email_address": "",
+                "reply_to_email_address": "",
+                "source_arn": ""
+              }
+            ],
+            "email_mfa_configuration": [],
+            "email_verification_message": "",
+            "email_verification_subject": "",
+            "endpoint": "cognito-idp.us-west-1.amazonaws.com/us-west-1_S6so5gOgJ",
+            "estimated_number_of_users": 0,
+            "id": "us-west-1_S6so5gOgJ",
+            "lambda_config": [],
+            "last_modified_date": "2025-12-10T00:57:02Z",
+            "mfa_configuration": "OFF",
+            "name": "streamsphere-users",
+            "password_policy": [
+              {
+                "minimum_length": 8,
+                "password_history_size": 0,
+                "require_lowercase": true,
+                "require_numbers": true,
+                "require_symbols": true,
+                "require_uppercase": true,
+                "temporary_password_validity_days": 7
+              }
+            ],
+            "schema": [],
+            "sign_in_policy": [
+              {
+                "allowed_first_auth_factors": [
+                  "PASSWORD"
+                ]
+              }
+            ],
+            "sms_authentication_message": "",
+            "sms_configuration": [],
+            "sms_verification_message": "",
+            "software_token_mfa_configuration": [],
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "user_attribute_update_settings": [],
+            "user_pool_add_ons": [],
+            "user_pool_tier": "ESSENTIALS",
+            "username_attributes": [],
+            "username_configuration": [],
+            "verification_message_template": [
+              {
+                "default_email_option": "CONFIRM_WITH_CODE",
+                "email_message": "",
+                "email_message_by_link": "",
+                "email_subject": "",
+                "email_subject_by_link": "",
+                "sms_message": ""
+              }
+            ],
+            "web_authn_configuration": []
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cognito_user_pool_client",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_token_validity": 0,
+            "allowed_oauth_flows": [
+              "code"
+            ],
+            "allowed_oauth_flows_user_pool_client": true,
+            "allowed_oauth_scopes": [
+              "email",
+              "openid",
+              "profile"
+            ],
+            "analytics_configuration": [],
+            "auth_session_validity": 3,
+            "callback_urls": [
+              "http://localhost:5173/"
+            ],
+            "client_secret": "",
+            "default_redirect_uri": "",
+            "enable_propagate_additional_user_context_data": false,
+            "enable_token_revocation": true,
+            "explicit_auth_flows": [],
+            "generate_secret": false,
+            "id": "273l9nu46t344ai6sj67gtt9e0",
+            "id_token_validity": 0,
+            "logout_urls": [],
+            "name": "streamsphere-client",
+            "prevent_user_existence_errors": "",
+            "read_attributes": [],
+            "refresh_token_rotation": [],
+            "refresh_token_validity": 30,
+            "supported_identity_providers": [
+              "COGNITO"
+            ],
+            "token_validity_units": [],
+            "user_pool_id": "us-west-1_S6so5gOgJ",
+            "write_attributes": []
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "client_secret"
+              }
+            ]
+          ],
+          "dependencies": [
+            "aws_cognito_user_pool.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_db_subnet_group",
+      "name": "db",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:rds:us-west-1:203918887492:subgrp:streamsphere-db-subnets",
+            "description": "Managed by Terraform",
+            "id": "streamsphere-db-subnets",
+            "name": "streamsphere-db-subnets",
+            "name_prefix": "",
+            "subnet_ids": [
+              "subnet-0cb2ea6cbb0267712",
+              "subnet-0e72359f16214c829"
+            ],
+            "supported_network_types": [
+              "IPV4"
+            ],
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_subnet.private_a",
+            "aws_subnet.private_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecr_repository",
+      "name": "api",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecr:us-west-1:203918887492:repository/streamsphere-api",
+            "encryption_configuration": [
+              {
+                "encryption_type": "AES256",
+                "kms_key": ""
+              }
+            ],
+            "force_delete": null,
+            "id": "streamsphere-api",
+            "image_scanning_configuration": [
+              {
+                "scan_on_push": true
+              }
+            ],
+            "image_tag_mutability": "MUTABLE",
+            "name": "streamsphere-api",
+            "registry_id": "203918887492",
+            "repository_url": "203918887492.dkr.ecr.us-west-1.amazonaws.com/streamsphere-api",
+            "tags": {
+              "Project": "streamsphere"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "streamsphere"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecr_repository",
+      "name": "worker",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecr:us-west-1:203918887492:repository/streamsphere-worker",
+            "encryption_configuration": [
+              {
+                "encryption_type": "AES256",
+                "kms_key": ""
+              }
+            ],
+            "force_delete": null,
+            "id": "streamsphere-worker",
+            "image_scanning_configuration": [
+              {
+                "scan_on_push": true
+              }
+            ],
+            "image_tag_mutability": "MUTABLE",
+            "name": "streamsphere-worker",
+            "registry_id": "203918887492",
+            "repository_url": "203918887492.dkr.ecr.us-west-1.amazonaws.com/streamsphere-worker",
+            "tags": {
+              "Project": "streamsphere"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "streamsphere"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecs_cluster",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecs:us-west-1:203918887492:cluster/streamsphere-cluster",
+            "configuration": [],
+            "id": "arn:aws:ecs:us-west-1:203918887492:cluster/streamsphere-cluster",
+            "name": "streamsphere-cluster",
+            "service_connect_defaults": [],
+            "setting": [
+              {
+                "name": "containerInsights",
+                "value": "disabled"
+              }
+            ],
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecs_service",
+      "name": "worker",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "alarms": [],
+            "availability_zone_rebalancing": "DISABLED",
+            "capacity_provider_strategy": [],
+            "cluster": "arn:aws:ecs:us-west-1:203918887492:cluster/streamsphere-cluster",
+            "deployment_circuit_breaker": [
+              {
+                "enable": false,
+                "rollback": false
+              }
+            ],
+            "deployment_controller": [
+              {
+                "type": "ECS"
+              }
+            ],
+            "deployment_maximum_percent": 200,
+            "deployment_minimum_healthy_percent": 100,
+            "desired_count": 1,
+            "enable_ecs_managed_tags": false,
+            "enable_execute_command": false,
+            "force_delete": null,
+            "force_new_deployment": null,
+            "health_check_grace_period_seconds": 0,
+            "iam_role": "/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "id": "arn:aws:ecs:us-west-1:203918887492:service/streamsphere-cluster/streamsphere-worker-svc",
+            "launch_type": "FARGATE",
+            "load_balancer": [],
+            "name": "streamsphere-worker-svc",
+            "network_configuration": [
+              {
+                "assign_public_ip": false,
+                "security_groups": [
+                  "sg-01ca5d1d26c96cd1c"
+                ],
+                "subnets": [
+                  "subnet-0cb2ea6cbb0267712",
+                  "subnet-0e72359f16214c829"
+                ]
+              }
+            ],
+            "ordered_placement_strategy": [],
+            "placement_constraints": [],
+            "platform_version": "LATEST",
+            "propagate_tags": "NONE",
+            "scheduling_strategy": "REPLICA",
+            "service_connect_configuration": [],
+            "service_registries": [],
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "task_definition": "arn:aws:ecs:us-west-1:203918887492:task-definition/streamsphere-worker:2",
+            "timeouts": null,
+            "triggers": {},
+            "volume_configuration": [],
+            "vpc_lattice_configurations": [],
+            "wait_for_steady_state": false
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_db_subnet_group.db",
+            "aws_ecr_repository.worker",
+            "aws_ecs_cluster.this",
+            "aws_ecs_task_definition.worker",
+            "aws_iam_role.api_task_role",
+            "aws_iam_role.ecs_task_execution",
+            "aws_rds_cluster.aurora",
+            "aws_s3_bucket.videos",
+            "aws_secretsmanager_secret.db",
+            "aws_security_group.alb",
+            "aws_security_group.db",
+            "aws_security_group.ecs_tasks",
+            "aws_sqs_queue.jobs",
+            "aws_subnet.private_a",
+            "aws_subnet.private_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecs_task_definition",
+      "name": "api",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ecs:us-west-1:203918887492:task-definition/streamsphere-api:2",
+            "arn_without_revision": "arn:aws:ecs:us-west-1:203918887492:task-definition/streamsphere-api",
+            "container_definitions": "[{\"environment\":[{\"name\":\"DB_HOST\",\"value\":\"streamsphere-aurora.cluster-cv6m2qaqwg5q.us-west-1.rds.amazonaws.com\"},{\"name\":\"DB_NAME\",\"value\":\"streamsphere\"},{\"name\":\"DB_SECRET_NAME\",\"value\":\"streamsphere-db-secret\"},{\"name\":\"QUEUE_URL\",\"value\":\"https://sqs.us-west-1.amazonaws.com/203918887492/streamsphere-jobs\"},{\"name\":\"S3_BUCKET_VIDEOS\",\"value\":\"streamsphere-videos-us-west-1\"}],\"essential\":true,\"image\":\"203918887492.dkr.ecr.us-west-1.amazonaws.com/streamsphere-api:latest\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"/ecs/streamsphere-api\",\"awslogs-region\":\"us-west-1\",\"awslogs-stream-prefix\":\"ecs\"}},\"mountPoints\":[],\"name\":\"api\",\"portMappings\":[{\"containerPort\":8080,\"hostPort\":8080,\"protocol\":\"tcp\"}],\"systemControls\":[],\"volumesFrom\":[]}]",
+            "cpu": "512",
+            "enable_fault_injection": false,
+            "ephemeral_storage": [],
+            "execution_role_arn": "arn:aws:iam::203918887492:role/streamsphere-ecsTaskExecutionRole",
+            "family": "streamsphere-api",
+            "id": "streamsphere-api",
+            "inference_accelerator": [],
+            "ipc_mode": "",
+            "memory": "1024",
+            "network_mode": "awsvpc",
+            "pid_mode": "",
+            "placement_constraints": [],
+            "proxy_configuration": [],
+            "requires_compatibilities": [
+              "FARGATE"
+            ],
+            "revision": 2,
+            "runtime_platform": [],
+            "skip_destroy": false,
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "task_role_arn": "arn:aws:iam::203918887492:role/streamsphere-api-task-role",
+            "track_latest": false,
+            "volume": []
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_db_subnet_group.db",
+            "aws_ecr_repository.api",
+            "aws_iam_role.api_task_role",
+            "aws_iam_role.ecs_task_execution",
+            "aws_rds_cluster.aurora",
+            "aws_s3_bucket.videos",
+            "aws_secretsmanager_secret.db",
+            "aws_security_group.db",
+            "aws_sqs_queue.jobs",
+            "aws_subnet.private_a",
+            "aws_subnet.private_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecs_task_definition",
+      "name": "worker",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ecs:us-west-1:203918887492:task-definition/streamsphere-worker:2",
+            "arn_without_revision": "arn:aws:ecs:us-west-1:203918887492:task-definition/streamsphere-worker",
+            "container_definitions": "[{\"environment\":[{\"name\":\"DB_HOST\",\"value\":\"streamsphere-aurora.cluster-cv6m2qaqwg5q.us-west-1.rds.amazonaws.com\"},{\"name\":\"DB_NAME\",\"value\":\"streamsphere\"},{\"name\":\"DB_SECRET_NAME\",\"value\":\"streamsphere-db-secret\"},{\"name\":\"QUEUE_URL\",\"value\":\"https://sqs.us-west-1.amazonaws.com/203918887492/streamsphere-jobs\"},{\"name\":\"S3_BUCKET_VIDEOS\",\"value\":\"streamsphere-videos-us-west-1\"}],\"essential\":true,\"image\":\"203918887492.dkr.ecr.us-west-1.amazonaws.com/streamsphere-worker:latest\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-stream-prefix\":\"ecs\",\"awslogs-group\":\"/ecs/streamsphere-worker\",\"awslogs-region\":\"us-west-1\"}},\"mountPoints\":[],\"name\":\"worker\",\"portMappings\":[],\"systemControls\":[],\"volumesFrom\":[]}]",
+            "cpu": "512",
+            "enable_fault_injection": false,
+            "ephemeral_storage": [],
+            "execution_role_arn": "arn:aws:iam::203918887492:role/streamsphere-ecsTaskExecutionRole",
+            "family": "streamsphere-worker",
+            "id": "streamsphere-worker",
+            "inference_accelerator": [],
+            "ipc_mode": "",
+            "memory": "1024",
+            "network_mode": "awsvpc",
+            "pid_mode": "",
+            "placement_constraints": [],
+            "proxy_configuration": [],
+            "requires_compatibilities": [
+              "FARGATE"
+            ],
+            "revision": 2,
+            "runtime_platform": [],
+            "skip_destroy": false,
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "task_role_arn": "arn:aws:iam::203918887492:role/streamsphere-api-task-role",
+            "track_latest": false,
+            "volume": []
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_db_subnet_group.db",
+            "aws_ecr_repository.worker",
+            "aws_iam_role.api_task_role",
+            "aws_iam_role.ecs_task_execution",
+            "aws_rds_cluster.aurora",
+            "aws_s3_bucket.videos",
+            "aws_secretsmanager_secret.db",
+            "aws_security_group.db",
+            "aws_sqs_queue.jobs",
+            "aws_subnet.private_a",
+            "aws_subnet.private_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_eip",
+      "name": "nat_eip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": null,
+            "allocation_id": "eipalloc-0d13e4c94a6aaed50",
+            "arn": "arn:aws:ec2:us-west-1:203918887492:elastic-ip/eipalloc-0d13e4c94a6aaed50",
+            "associate_with_private_ip": null,
+            "association_id": "eipassoc-022b6e2b2d26bd953",
+            "carrier_ip": "",
+            "customer_owned_ip": "",
+            "customer_owned_ipv4_pool": "",
+            "domain": "vpc",
+            "id": "eipalloc-0d13e4c94a6aaed50",
+            "instance": "",
+            "ipam_pool_id": null,
+            "network_border_group": "us-west-1",
+            "network_interface": "eni-00772be614ffa4336",
+            "private_dns": "ip-10-20-1-80.us-west-1.compute.internal",
+            "private_ip": "10.20.1.80",
+            "ptr_record": "",
+            "public_dns": "ec2-184-169-226-165.us-west-1.compute.amazonaws.com",
+            "public_ip": "184.169.226.165",
+            "public_ipv4_pool": "amazon",
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc": true
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxODAwMDAwMDAwMDAsInJlYWQiOjkwMDAwMDAwMDAwMCwidXBkYXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_policy",
+      "name": "s3_sqs_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::203918887492:policy/streamsphere-s3-sqs-policy",
+            "attachment_count": 2,
+            "description": "",
+            "id": "arn:aws:iam::203918887492:policy/streamsphere-s3-sqs-policy",
+            "name": "streamsphere-s3-sqs-policy",
+            "name_prefix": "",
+            "path": "/",
+            "policy": "{\"Statement\":[{\"Action\":[\"s3:*\"],\"Effect\":\"Allow\",\"Resource\":[\"*\"]},{\"Action\":[\"sqs:*\"],\"Effect\":\"Allow\",\"Resource\":[\"*\"]}],\"Version\":\"2012-10-17\"}",
+            "policy_id": "ANPAS66UDJJCHVTV3ZVTA",
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "api_task",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::203918887492:role/streamsphere-apiTaskRole",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2025-12-10T00:57:02Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "streamsphere-apiTaskRole",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::203918887492:policy/streamsphere-s3-sqs-policy"
+            ],
+            "max_session_duration": 3600,
+            "name": "streamsphere-apiTaskRole",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "unique_id": "AROAS66UDJJCAQC6KRADN"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "api_task_role",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::203918887492:role/streamsphere-api-task-role",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2025-12-10T00:57:01Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "streamsphere-api-task-role",
+            "inline_policy": [
+              {
+                "name": "streamsphere-api-task-policy",
+                "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"s3:PutObject\",\"s3:GetObject\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:s3:::streamsphere-videos/*\"},{\"Action\":[\"sqs:SendMessage\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:sqs:us-west-1:203918887492:streamsphere-jobs\"},{\"Action\":[\"secretsmanager:GetSecretValue\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:secretsmanager:us-west-1:203918887492:secret:streamsphere-db-secret-57h9k8\"}]}"
+              }
+            ],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "streamsphere-api-task-role",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "unique_id": "AROAS66UDJJCODT7M6FF6"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "ecs_task_execution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::203918887492:role/streamsphere-ecsTaskExecutionRole",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2025-12-10T00:57:01Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "streamsphere-ecsTaskExecutionRole",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+            ],
+            "max_session_duration": 3600,
+            "name": "streamsphere-ecsTaskExecutionRole",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "unique_id": "AROAS66UDJJCAUEKNK47Z"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "worker_task",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::203918887492:role/streamsphere-workerTaskRole",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2025-12-10T00:57:01Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "streamsphere-workerTaskRole",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::203918887492:policy/streamsphere-s3-sqs-policy"
+            ],
+            "max_session_duration": 3600,
+            "name": "streamsphere-workerTaskRole",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "unique_id": "AROAS66UDJJCMXYJQEZDS"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "api_task_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "streamsphere-api-task-role:streamsphere-api-task-policy",
+            "name": "streamsphere-api-task-policy",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"s3:PutObject\",\"s3:GetObject\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:s3:::streamsphere-videos/*\"},{\"Action\":[\"sqs:SendMessage\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:sqs:us-west-1:203918887492:streamsphere-jobs\"},{\"Action\":[\"secretsmanager:GetSecretValue\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:secretsmanager:us-west-1:203918887492:secret:streamsphere-db-secret-57h9k8\"}]}",
+            "role": "streamsphere-api-task-role"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.api_task_role",
+            "aws_secretsmanager_secret.db",
+            "aws_sqs_queue.jobs"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "api_attach_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "streamsphere-apiTaskRole-20251210005702845000000005",
+            "policy_arn": "arn:aws:iam::203918887492:policy/streamsphere-s3-sqs-policy",
+            "role": "streamsphere-apiTaskRole"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_policy.s3_sqs_policy",
+            "aws_iam_role.api_task"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "ecs_task_exec_attach",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "streamsphere-ecsTaskExecutionRole-20251210005702638500000002",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+            "role": "streamsphere-ecsTaskExecutionRole"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.ecs_task_execution"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "worker_attach_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "streamsphere-workerTaskRole-20251210005702791300000004",
+            "policy_arn": "arn:aws:iam::203918887492:policy/streamsphere-s3-sqs-policy",
+            "role": "streamsphere-workerTaskRole"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_policy.s3_sqs_policy",
+            "aws_iam_role.worker_task"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "igw",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:internet-gateway/igw-0e9f062c8ca10bad8",
+            "id": "igw-0e9f062c8ca10bad8",
+            "owner_id": "203918887492",
+            "tags": {
+              "Name": "streamsphere-igw"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-igw",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_vpc.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lb",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_logs": [
+              {
+                "bucket": "",
+                "enabled": false,
+                "prefix": ""
+              }
+            ],
+            "arn": "arn:aws:elasticloadbalancing:us-west-1:203918887492:loadbalancer/app/streamsphere-alb/dd6d933acb5e7d48",
+            "arn_suffix": "app/streamsphere-alb/dd6d933acb5e7d48",
+            "client_keep_alive": 3600,
+            "connection_logs": [
+              {
+                "bucket": "",
+                "enabled": false,
+                "prefix": ""
+              }
+            ],
+            "customer_owned_ipv4_pool": "",
+            "desync_mitigation_mode": "defensive",
+            "dns_name": "streamsphere-alb-1879663737.us-west-1.elb.amazonaws.com",
+            "dns_record_client_routing_policy": null,
+            "drop_invalid_header_fields": false,
+            "enable_cross_zone_load_balancing": true,
+            "enable_deletion_protection": false,
+            "enable_http2": true,
+            "enable_tls_version_and_cipher_suite_headers": false,
+            "enable_waf_fail_open": false,
+            "enable_xff_client_port": false,
+            "enable_zonal_shift": false,
+            "enforce_security_group_inbound_rules_on_private_link_traffic": "",
+            "id": "arn:aws:elasticloadbalancing:us-west-1:203918887492:loadbalancer/app/streamsphere-alb/dd6d933acb5e7d48",
+            "idle_timeout": 60,
+            "internal": false,
+            "ip_address_type": "ipv4",
+            "ipam_pools": [],
+            "load_balancer_type": "application",
+            "minimum_load_balancer_capacity": [],
+            "name": "streamsphere-alb",
+            "name_prefix": "",
+            "preserve_host_header": false,
+            "security_groups": [
+              "sg-03c979ebc5d6fdc21"
+            ],
+            "subnet_mapping": [
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-02637f25c0c93fff4"
+              },
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-099fd4573fd1d16c4"
+              }
+            ],
+            "subnets": [
+              "subnet-02637f25c0c93fff4",
+              "subnet-099fd4573fd1d16c4"
+            ],
+            "tags": {
+              "Project": "streamsphere"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "streamsphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d",
+            "xff_header_processing_mode": "append",
+            "zone_id": "Z368ELLRRE2KJ0"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_security_group.alb",
+            "aws_subnet.public_a",
+            "aws_subnet.public_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lb_listener",
+      "name": "http",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "alpn_policy": null,
+            "arn": "arn:aws:elasticloadbalancing:us-west-1:203918887492:listener/app/streamsphere-alb/dd6d933acb5e7d48/50b6482a5c0a8dd7",
+            "certificate_arn": null,
+            "default_action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [],
+                "forward": [],
+                "order": 1,
+                "redirect": [],
+                "target_group_arn": "arn:aws:elasticloadbalancing:us-west-1:203918887492:targetgroup/streamsphere-tg/40ebc311c9d40dd4",
+                "type": "forward"
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:us-west-1:203918887492:listener/app/streamsphere-alb/dd6d933acb5e7d48/50b6482a5c0a8dd7",
+            "load_balancer_arn": "arn:aws:elasticloadbalancing:us-west-1:203918887492:loadbalancer/app/streamsphere-alb/dd6d933acb5e7d48",
+            "mutual_authentication": [],
+            "port": 80,
+            "protocol": "HTTP",
+            "routing_http_request_x_amzn_mtls_clientcert_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_issuer_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_leaf_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_serial_number_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_subject_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_validity_header_name": null,
+            "routing_http_request_x_amzn_tls_cipher_suite_header_name": null,
+            "routing_http_request_x_amzn_tls_version_header_name": null,
+            "routing_http_response_access_control_allow_credentials_header_value": "",
+            "routing_http_response_access_control_allow_headers_header_value": "",
+            "routing_http_response_access_control_allow_methods_header_value": "",
+            "routing_http_response_access_control_allow_origin_header_value": "",
+            "routing_http_response_access_control_expose_headers_header_value": "",
+            "routing_http_response_access_control_max_age_header_value": "",
+            "routing_http_response_content_security_policy_header_value": "",
+            "routing_http_response_server_enabled": true,
+            "routing_http_response_strict_transport_security_header_value": "",
+            "routing_http_response_x_content_type_options_header_value": "",
+            "routing_http_response_x_frame_options_header_value": "",
+            "ssl_policy": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "tcp_idle_timeout_seconds": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsInVwZGF0ZSI6MzAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "aws_lb.app",
+            "aws_lb_target_group.api",
+            "aws_lb_target_group.api_tg",
+            "aws_security_group.alb",
+            "aws_subnet.public_a",
+            "aws_subnet.public_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lb_target_group",
+      "name": "api",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:elasticloadbalancing:us-west-1:203918887492:targetgroup/streamsphere-tg/40ebc311c9d40dd4",
+            "arn_suffix": "targetgroup/streamsphere-tg/40ebc311c9d40dd4",
+            "connection_termination": null,
+            "deregistration_delay": "300",
+            "health_check": [
+              {
+                "enabled": true,
+                "healthy_threshold": 3,
+                "interval": 30,
+                "matcher": "200",
+                "path": "/healthz",
+                "port": "traffic-port",
+                "protocol": "HTTP",
+                "timeout": 5,
+                "unhealthy_threshold": 3
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:us-west-1:203918887492:targetgroup/streamsphere-tg/40ebc311c9d40dd4",
+            "ip_address_type": "ipv4",
+            "lambda_multi_value_headers_enabled": false,
+            "load_balancer_arns": [
+              "arn:aws:elasticloadbalancing:us-west-1:203918887492:loadbalancer/app/streamsphere-alb/dd6d933acb5e7d48"
+            ],
+            "load_balancing_algorithm_type": "round_robin",
+            "load_balancing_anomaly_mitigation": "off",
+            "load_balancing_cross_zone_enabled": "use_load_balancer_configuration",
+            "name": "streamsphere-tg",
+            "name_prefix": "",
+            "port": 8080,
+            "preserve_client_ip": null,
+            "protocol": "HTTP",
+            "protocol_version": "HTTP1",
+            "proxy_protocol_v2": false,
+            "slow_start": 0,
+            "stickiness": [
+              {
+                "cookie_duration": 86400,
+                "cookie_name": "",
+                "enabled": false,
+                "type": "lb_cookie"
+              }
+            ],
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "target_failover": [
+              {
+                "on_deregistration": null,
+                "on_unhealthy": null
+              }
+            ],
+            "target_group_health": [
+              {
+                "dns_failover": [
+                  {
+                    "minimum_healthy_targets_count": "1",
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ],
+                "unhealthy_state_routing": [
+                  {
+                    "minimum_healthy_targets_count": 1,
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ]
+              }
+            ],
+            "target_health_state": [
+              {
+                "enable_unhealthy_connection_termination": null,
+                "unhealthy_draining_interval": null
+              }
+            ],
+            "target_type": "instance",
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_vpc.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lb_target_group",
+      "name": "api_tg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:elasticloadbalancing:us-west-1:203918887492:targetgroup/streamsphere-api-tg-v2/376c0c967a34099f",
+            "arn_suffix": "targetgroup/streamsphere-api-tg-v2/376c0c967a34099f",
+            "connection_termination": null,
+            "deregistration_delay": "300",
+            "health_check": [
+              {
+                "enabled": true,
+                "healthy_threshold": 2,
+                "interval": 30,
+                "matcher": "200",
+                "path": "/healthz",
+                "port": "traffic-port",
+                "protocol": "HTTP",
+                "timeout": 5,
+                "unhealthy_threshold": 2
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:us-west-1:203918887492:targetgroup/streamsphere-api-tg-v2/376c0c967a34099f",
+            "ip_address_type": "ipv4",
+            "lambda_multi_value_headers_enabled": false,
+            "load_balancer_arns": [],
+            "load_balancing_algorithm_type": "round_robin",
+            "load_balancing_anomaly_mitigation": "off",
+            "load_balancing_cross_zone_enabled": "use_load_balancer_configuration",
+            "name": "streamsphere-api-tg-v2",
+            "name_prefix": "",
+            "port": 8080,
+            "preserve_client_ip": null,
+            "protocol": "HTTP",
+            "protocol_version": "HTTP1",
+            "proxy_protocol_v2": false,
+            "slow_start": 0,
+            "stickiness": [
+              {
+                "cookie_duration": 86400,
+                "cookie_name": "",
+                "enabled": false,
+                "type": "lb_cookie"
+              }
+            ],
+            "tags": null,
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "target_failover": [
+              {
+                "on_deregistration": null,
+                "on_unhealthy": null
+              }
+            ],
+            "target_group_health": [
+              {
+                "dns_failover": [
+                  {
+                    "minimum_healthy_targets_count": "1",
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ],
+                "unhealthy_state_routing": [
+                  {
+                    "minimum_healthy_targets_count": 1,
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ]
+              }
+            ],
+            "target_health_state": [
+              {
+                "enable_unhealthy_connection_termination": null,
+                "unhealthy_draining_interval": null
+              }
+            ],
+            "target_type": "ip",
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_vpc.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_nat_gateway",
+      "name": "nat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "allocation_id": "eipalloc-0d13e4c94a6aaed50",
+            "association_id": "eipassoc-022b6e2b2d26bd953",
+            "connectivity_type": "public",
+            "id": "nat-0337b6e864dd18461",
+            "network_interface_id": "eni-00772be614ffa4336",
+            "private_ip": "10.20.1.80",
+            "public_ip": "184.169.226.165",
+            "secondary_allocation_ids": [],
+            "secondary_private_ip_address_count": 0,
+            "secondary_private_ip_addresses": [],
+            "subnet_id": "subnet-099fd4573fd1d16c4",
+            "tags": {
+              "Name": "streamsphere-nat"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-nat",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwMCwidXBkYXRlIjo2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_eip.nat_eip",
+            "aws_internet_gateway.igw",
+            "aws_subnet.public_a",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_rds_cluster",
+      "name": "aurora",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "allocated_storage": 1,
+            "allow_major_version_upgrade": null,
+            "apply_immediately": null,
+            "arn": "arn:aws:rds:us-west-1:203918887492:cluster:streamsphere-aurora",
+            "availability_zones": [
+              "us-west-1a",
+              "us-west-1c"
+            ],
+            "backtrack_window": 0,
+            "backup_retention_period": 1,
+            "ca_certificate_identifier": null,
+            "ca_certificate_valid_till": null,
+            "cluster_identifier": "streamsphere-aurora",
+            "cluster_identifier_prefix": "",
+            "cluster_members": [
+              "streamsphere-aurora-0",
+              "streamsphere-aurora-1"
+            ],
+            "cluster_resource_id": "cluster-QTGVMR7I5F7IG4KWUCWT54PELU",
+            "cluster_scalability_type": "",
+            "copy_tags_to_snapshot": false,
+            "database_insights_mode": "standard",
+            "database_name": "streamsphere",
+            "db_cluster_instance_class": "",
+            "db_cluster_parameter_group_name": "default.aurora-postgresql17",
+            "db_instance_parameter_group_name": null,
+            "db_subnet_group_name": "streamsphere-db-subnets",
+            "db_system_id": "",
+            "delete_automated_backups": true,
+            "deletion_protection": false,
+            "domain": "",
+            "domain_iam_role_name": "",
+            "enable_global_write_forwarding": false,
+            "enable_http_endpoint": false,
+            "enable_local_write_forwarding": false,
+            "enabled_cloudwatch_logs_exports": [],
+            "endpoint": "streamsphere-aurora.cluster-cv6m2qaqwg5q.us-west-1.rds.amazonaws.com",
+            "engine": "aurora-postgresql",
+            "engine_lifecycle_support": "open-source-rds-extended-support",
+            "engine_mode": "provisioned",
+            "engine_version": "17.4",
+            "engine_version_actual": "17.4",
+            "final_snapshot_identifier": null,
+            "global_cluster_identifier": "",
+            "hosted_zone_id": "Z10WI91S59XXQN",
+            "iam_database_authentication_enabled": false,
+            "iam_roles": [],
+            "id": "streamsphere-aurora",
+            "iops": 0,
+            "kms_key_id": "arn:aws:kms:us-west-1:203918887492:key/78309d57-11bd-4faf-99a8-55a4c25c5a6e",
+            "manage_master_user_password": null,
+            "master_password": "changeme123",
+            "master_password_wo": null,
+            "master_password_wo_version": null,
+            "master_user_secret": [],
+            "master_user_secret_kms_key_id": null,
+            "master_username": "streamsphere",
+            "monitoring_interval": 0,
+            "monitoring_role_arn": "",
+            "network_type": "IPV4",
+            "performance_insights_enabled": false,
+            "performance_insights_kms_key_id": "",
+            "performance_insights_retention_period": 0,
+            "port": 5432,
+            "preferred_backup_window": "08:20-08:50",
+            "preferred_maintenance_window": "tue:11:09-tue:11:39",
+            "reader_endpoint": "streamsphere-aurora.cluster-ro-cv6m2qaqwg5q.us-west-1.rds.amazonaws.com",
+            "replication_source_identifier": "",
+            "restore_to_point_in_time": [],
+            "s3_import": [],
+            "scaling_configuration": [],
+            "serverlessv2_scaling_configuration": [],
+            "skip_final_snapshot": false,
+            "snapshot_identifier": null,
+            "source_region": null,
+            "storage_encrypted": true,
+            "storage_type": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_security_group_ids": [
+              "sg-0971111fbe8307109"
+            ]
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "master_password_wo"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "master_password"
+              }
+            ]
+          ],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo3MjAwMDAwMDAwMDAwLCJkZWxldGUiOjcyMDAwMDAwMDAwMDAsInVwZGF0ZSI6NzIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_db_subnet_group.db",
+            "aws_security_group.db",
+            "aws_subnet.private_a",
+            "aws_subnet.private_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_rds_cluster_instance",
+      "name": "aurora_instances",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "apply_immediately": null,
+            "arn": "arn:aws:rds:us-west-1:203918887492:db:streamsphere-aurora-0",
+            "auto_minor_version_upgrade": true,
+            "availability_zone": "us-west-1a",
+            "ca_cert_identifier": "rds-ca-rsa2048-g1",
+            "cluster_identifier": "streamsphere-aurora",
+            "copy_tags_to_snapshot": false,
+            "custom_iam_instance_profile": "",
+            "db_parameter_group_name": "default.aurora-postgresql17",
+            "db_subnet_group_name": "streamsphere-db-subnets",
+            "dbi_resource_id": "db-NJBEZWBXHH27EKDBYE46OVX45U",
+            "endpoint": "streamsphere-aurora-0.cv6m2qaqwg5q.us-west-1.rds.amazonaws.com",
+            "engine": "aurora-postgresql",
+            "engine_version": "17.4",
+            "engine_version_actual": "17.4",
+            "force_destroy": false,
+            "id": "streamsphere-aurora-0",
+            "identifier": "streamsphere-aurora-0",
+            "identifier_prefix": "",
+            "instance_class": "db.t3.medium",
+            "kms_key_id": "arn:aws:kms:us-west-1:203918887492:key/78309d57-11bd-4faf-99a8-55a4c25c5a6e",
+            "monitoring_interval": 0,
+            "monitoring_role_arn": "",
+            "network_type": "IPV4",
+            "performance_insights_enabled": false,
+            "performance_insights_kms_key_id": "",
+            "performance_insights_retention_period": 0,
+            "port": 5432,
+            "preferred_backup_window": "08:20-08:50",
+            "preferred_maintenance_window": "tue:10:29-tue:10:59",
+            "promotion_tier": 0,
+            "publicly_accessible": false,
+            "storage_encrypted": true,
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "writer": true
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInVwZGF0ZSI6NTQwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_db_subnet_group.db",
+            "aws_rds_cluster.aurora",
+            "aws_security_group.db",
+            "aws_subnet.private_a",
+            "aws_subnet.private_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "apply_immediately": null,
+            "arn": "arn:aws:rds:us-west-1:203918887492:db:streamsphere-aurora-1",
+            "auto_minor_version_upgrade": true,
+            "availability_zone": "us-west-1c",
+            "ca_cert_identifier": "rds-ca-rsa2048-g1",
+            "cluster_identifier": "streamsphere-aurora",
+            "copy_tags_to_snapshot": false,
+            "custom_iam_instance_profile": "",
+            "db_parameter_group_name": "default.aurora-postgresql17",
+            "db_subnet_group_name": "streamsphere-db-subnets",
+            "dbi_resource_id": "db-VHFVTEVWXOECOUHMKBCR66U2PE",
+            "endpoint": "streamsphere-aurora-1.cv6m2qaqwg5q.us-west-1.rds.amazonaws.com",
+            "engine": "aurora-postgresql",
+            "engine_version": "17.4",
+            "engine_version_actual": "17.4",
+            "force_destroy": false,
+            "id": "streamsphere-aurora-1",
+            "identifier": "streamsphere-aurora-1",
+            "identifier_prefix": "",
+            "instance_class": "db.t3.medium",
+            "kms_key_id": "arn:aws:kms:us-west-1:203918887492:key/78309d57-11bd-4faf-99a8-55a4c25c5a6e",
+            "monitoring_interval": 0,
+            "monitoring_role_arn": "",
+            "network_type": "IPV4",
+            "performance_insights_enabled": false,
+            "performance_insights_kms_key_id": "",
+            "performance_insights_retention_period": 0,
+            "port": 5432,
+            "preferred_backup_window": "08:20-08:50",
+            "preferred_maintenance_window": "sun:08:52-sun:09:22",
+            "promotion_tier": 0,
+            "publicly_accessible": false,
+            "storage_encrypted": true,
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "writer": false
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInVwZGF0ZSI6NTQwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_db_subnet_group.db",
+            "aws_rds_cluster.aurora",
+            "aws_security_group.db",
+            "aws_subnet.private_a",
+            "aws_subnet.private_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:route-table/rtb-0c0cb33d53908f942",
+            "id": "rtb-0c0cb33d53908f942",
+            "owner_id": "203918887492",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "nat-0337b6e864dd18461",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "streamsphere-private-rt"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-private-rt",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat_eip",
+            "aws_internet_gateway.igw",
+            "aws_nat_gateway.nat",
+            "aws_subnet.public_a",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:route-table/rtb-021b8ee745ff9b91f",
+            "id": "rtb-021b8ee745ff9b91f",
+            "owner_id": "203918887492",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "igw-0e9f062c8ca10bad8",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "streamsphere-public-rt"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-public-rt",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.igw",
+            "aws_vpc.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "priv_a",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-00bfad8ad57650dcd",
+            "route_table_id": "rtb-0c0cb33d53908f942",
+            "subnet_id": "subnet-0e72359f16214c829",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat_eip",
+            "aws_internet_gateway.igw",
+            "aws_nat_gateway.nat",
+            "aws_route_table.private",
+            "aws_subnet.private_a",
+            "aws_subnet.public_a",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "priv_b",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0e7a529a1075a6461",
+            "route_table_id": "rtb-0c0cb33d53908f942",
+            "subnet_id": "subnet-0cb2ea6cbb0267712",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat_eip",
+            "aws_internet_gateway.igw",
+            "aws_nat_gateway.nat",
+            "aws_route_table.private",
+            "aws_subnet.private_b",
+            "aws_subnet.public_a",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "pub_a",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-010bf5d86992af9e1",
+            "route_table_id": "rtb-021b8ee745ff9b91f",
+            "subnet_id": "subnet-099fd4573fd1d16c4",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.igw",
+            "aws_route_table.public",
+            "aws_subnet.public_a",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "pub_b",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-05d1ede18ec92f125",
+            "route_table_id": "rtb-021b8ee745ff9b91f",
+            "subnet_id": "subnet-02637f25c0c93fff4",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.igw",
+            "aws_route_table.public",
+            "aws_subnet.public_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::streamsphere-frontend-us-west-1",
+            "bucket": "streamsphere-frontend-us-west-1",
+            "bucket_domain_name": "streamsphere-frontend-us-west-1.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "streamsphere-frontend-us-west-1.s3.us-west-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "4f9f56601a4773a036ff800c19db231a74f58b77fef8c15da76adda76daf4ef0",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z2F56UZL2M1ACD",
+            "id": "streamsphere-frontend-us-west-1",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-west-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {
+              "Project": "streamsphere"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "streamsphere"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [
+              {
+                "error_document": "index.html",
+                "index_document": "index.html",
+                "redirect_all_requests_to": "",
+                "routing_rules": ""
+              }
+            ],
+            "website_domain": "s3-website-us-west-1.amazonaws.com",
+            "website_endpoint": "streamsphere-frontend-us-west-1.s3-website-us-west-1.amazonaws.com"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "videos",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::streamsphere-videos-us-west-1",
+            "bucket": "streamsphere-videos-us-west-1",
+            "bucket_domain_name": "streamsphere-videos-us-west-1.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "streamsphere-videos-us-west-1.s3.us-west-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "4f9f56601a4773a036ff800c19db231a74f58b77fef8c15da76adda76daf4ef0",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z2F56UZL2M1ACD",
+            "id": "streamsphere-videos-us-west-1",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-west-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {
+              "Project": "streamsphere"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "streamsphere"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_website_configuration",
+      "name": "frontend_web",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "streamsphere-frontend-us-west-1",
+            "error_document": [
+              {
+                "key": "index.html"
+              }
+            ],
+            "expected_bucket_owner": "",
+            "id": "streamsphere-frontend-us-west-1",
+            "index_document": [
+              {
+                "suffix": "index.html"
+              }
+            ],
+            "redirect_all_requests_to": [],
+            "routing_rule": [],
+            "routing_rules": "",
+            "website_domain": "s3-website-us-west-1.amazonaws.com",
+            "website_endpoint": "streamsphere-frontend-us-west-1.s3-website-us-west-1.amazonaws.com"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.frontend"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_secretsmanager_secret",
+      "name": "db",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:secretsmanager:us-west-1:203918887492:secret:streamsphere-db-secret-57h9k8",
+            "description": "",
+            "force_overwrite_replica_secret": false,
+            "id": "arn:aws:secretsmanager:us-west-1:203918887492:secret:streamsphere-db-secret-57h9k8",
+            "kms_key_id": "",
+            "name": "streamsphere-db-secret",
+            "name_prefix": "",
+            "policy": "",
+            "recovery_window_in_days": 30,
+            "replica": [],
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_secretsmanager_secret_version",
+      "name": "db_version",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:secretsmanager:us-west-1:203918887492:secret:streamsphere-db-secret-57h9k8",
+            "has_secret_string_wo": null,
+            "id": "arn:aws:secretsmanager:us-west-1:203918887492:secret:streamsphere-db-secret-57h9k8|terraform-20251210011004777800000002",
+            "secret_binary": "",
+            "secret_id": "arn:aws:secretsmanager:us-west-1:203918887492:secret:streamsphere-db-secret-57h9k8",
+            "secret_string": "{\"dbname\":\"streamsphere\",\"host\":\"streamsphere-aurora.cluster-cv6m2qaqwg5q.us-west-1.rds.amazonaws.com\",\"password\":\"changeme123\",\"port\":5432,\"username\":\"streamsphere\"}",
+            "secret_string_wo": null,
+            "secret_string_wo_version": null,
+            "version_id": "terraform-20251210011004777800000002",
+            "version_stages": [
+              "AWSCURRENT"
+            ]
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "secret_string"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "secret_string_wo"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "secret_binary"
+              }
+            ]
+          ],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_db_subnet_group.db",
+            "aws_rds_cluster.aurora",
+            "aws_secretsmanager_secret.db",
+            "aws_security_group.db",
+            "aws_subnet.private_a",
+            "aws_subnet.private_b",
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "alb",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:security-group/sg-03c979ebc5d6fdc21",
+            "description": "Managed by Terraform",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-03c979ebc5d6fdc21",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "name": "streamsphere-alb-sg",
+            "name_prefix": "",
+            "owner_id": "203918887492",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "streamsphere-alb-sg"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-alb-sg",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "db",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:security-group/sg-0971111fbe8307109",
+            "description": "Managed by Terraform",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-0971111fbe8307109",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "10.20.0.0/16"
+                ],
+                "description": "",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 5432
+              }
+            ],
+            "name": "streamsphere-db-sg",
+            "name_prefix": "",
+            "owner_id": "203918887492",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "streamsphere-db-sg"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-db-sg",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "ecs_tasks",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:security-group/sg-01ca5d1d26c96cd1c",
+            "description": "Managed by Terraform",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-01ca5d1d26c96cd1c",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "",
+                "from_port": 8080,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-03c979ebc5d6fdc21"
+                ],
+                "self": false,
+                "to_port": 8080
+              }
+            ],
+            "name": "streamsphere-ecs-sg",
+            "name_prefix": "",
+            "owner_id": "203918887492",
+            "revoke_rules_on_delete": false,
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_security_group.alb",
+            "aws_vpc.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sqs_queue",
+      "name": "dlq",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sqs:us-west-1:203918887492:streamsphere-dlq",
+            "content_based_deduplication": false,
+            "deduplication_scope": "",
+            "delay_seconds": 0,
+            "fifo_queue": false,
+            "fifo_throughput_limit": "",
+            "id": "https://sqs.us-west-1.amazonaws.com/203918887492/streamsphere-dlq",
+            "kms_data_key_reuse_period_seconds": 300,
+            "kms_master_key_id": "",
+            "max_message_size": 262144,
+            "message_retention_seconds": 345600,
+            "name": "streamsphere-dlq",
+            "name_prefix": "",
+            "policy": "",
+            "receive_wait_time_seconds": 0,
+            "redrive_allow_policy": "",
+            "redrive_policy": "",
+            "sqs_managed_sse_enabled": true,
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "url": "https://sqs.us-west-1.amazonaws.com/203918887492/streamsphere-dlq",
+            "visibility_timeout_seconds": 30
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sqs_queue",
+      "name": "jobs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sqs:us-west-1:203918887492:streamsphere-jobs",
+            "content_based_deduplication": false,
+            "deduplication_scope": "",
+            "delay_seconds": 0,
+            "fifo_queue": false,
+            "fifo_throughput_limit": "",
+            "id": "https://sqs.us-west-1.amazonaws.com/203918887492/streamsphere-jobs",
+            "kms_data_key_reuse_period_seconds": 300,
+            "kms_master_key_id": "",
+            "max_message_size": 262144,
+            "message_retention_seconds": 345600,
+            "name": "streamsphere-jobs",
+            "name_prefix": "",
+            "policy": "",
+            "receive_wait_time_seconds": 0,
+            "redrive_allow_policy": "",
+            "redrive_policy": "{\"deadLetterTargetArn\":\"arn:aws:sqs:us-west-1:203918887492:streamsphere-dlq\",\"maxReceiveCount\":5}",
+            "sqs_managed_sse_enabled": true,
+            "tags": {},
+            "tags_all": {
+              "Environment": "Dev",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "url": "https://sqs.us-west-1.amazonaws.com/203918887492/streamsphere-jobs",
+            "visibility_timeout_seconds": 60
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sqs_queue_redrive_policy",
+      "name": "jobs_redrive",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "https://sqs.us-west-1.amazonaws.com/203918887492/streamsphere-jobs",
+            "queue_url": "https://sqs.us-west-1.amazonaws.com/203918887492/streamsphere-jobs",
+            "redrive_policy": "{\"deadLetterTargetArn\":\"arn:aws:sqs:us-west-1:203918887492:streamsphere-dlq\",\"maxReceiveCount\":5}"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_sqs_queue.dlq",
+            "aws_sqs_queue.jobs"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "private_a",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:subnet/subnet-0e72359f16214c829",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-west-1a",
+            "availability_zone_id": "usw1-az1",
+            "cidr_block": "10.20.11.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0e72359f16214c829",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "203918887492",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "streamsphere-private-a"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-private-a",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "private_b",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:subnet/subnet-0cb2ea6cbb0267712",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-west-1c",
+            "availability_zone_id": "usw1-az3",
+            "cidr_block": "10.20.12.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0cb2ea6cbb0267712",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "203918887492",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "streamsphere-private-b"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-private-b",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public_a",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:subnet/subnet-099fd4573fd1d16c4",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-west-1a",
+            "availability_zone_id": "usw1-az1",
+            "cidr_block": "10.20.1.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-099fd4573fd1d16c4",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "203918887492",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "streamsphere-public-a"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-public-a",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public_b",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:subnet/subnet-02637f25c0c93fff4",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-west-1c",
+            "availability_zone_id": "usw1-az3",
+            "cidr_block": "10.20.2.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-02637f25c0c93fff4",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "203918887492",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "streamsphere-public-b"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-public-b",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0de529f1c149a576d"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.this",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-west-1:203918887492:vpc/vpc-0de529f1c149a576d",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.20.0.0/16",
+            "default_network_acl_id": "acl-019c2858021a01ad6",
+            "default_route_table_id": "rtb-0d8e7c8f3723f5829",
+            "default_security_group_id": "sg-0b67ac5ae6549dfc0",
+            "dhcp_options_id": "dopt-0cbb4dc61353b2e28",
+            "enable_dns_hostnames": true,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "id": "vpc-0de529f1c149a576d",
+            "instance_tenancy": "default",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_network_border_group": "",
+            "ipv6_ipam_pool_id": "",
+            "ipv6_netmask_length": 0,
+            "main_route_table_id": "rtb-0d8e7c8f3723f5829",
+            "owner_id": "203918887492",
+            "tags": {
+              "Name": "streamsphere-vpc"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "streamsphere-vpc",
+              "Owner": "Tamizh Selvan",
+              "Project": "StreamSphere"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
